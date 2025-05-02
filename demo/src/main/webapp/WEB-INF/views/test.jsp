@@ -31,4 +31,4 @@
 	
 	<a href="p3/aaa/1234">PathVariable로 파라미터 처리하기</a>
 </body>
-</html>
+</html> 

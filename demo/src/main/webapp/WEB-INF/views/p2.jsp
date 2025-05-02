@@ -17,7 +17,7 @@ List<Member> list = (List<Member>) request.getAttribute("list");
 	<hr>
 
 	<%
-	for (Member m : list) {
+		for (Member m : list) {
 	%>
 	<ul>
 		<li>ID: <%=m.getId()%><br></li>
@@ -26,7 +26,7 @@ List<Member> list = (List<Member>) request.getAttribute("list");
 	</ul>
 	<hr>
 	<%
-	}
+		}
 	%>
 	<a href="test">test 페이지로 가기 </a>
 	${member }

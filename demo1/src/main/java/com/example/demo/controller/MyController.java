@@ -16,7 +16,14 @@ public class MyController {
 		return "Springboot Start";
 	}
 	
+	@GetMapping("/test")
+	public String test() {
+		System.out.println("test..........");
+		return "test";
+	}
+	
 	@GetMapping("/p2")
+	
 	public String p2(@RequestParam("id") String id,
 						@RequestParam("pw") String pw,
 						@RequestParam("name") String name, Model model) {

@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>P2 Page</h1>
-	id: ${id }
-	pw: ${pw }
-	name: ${name}
+	<h1>>P3 Page</h1>
+	<hr>
+	
+	id:${id }<br>
+	pw:${pw }
+	
 </body>
 </html>
