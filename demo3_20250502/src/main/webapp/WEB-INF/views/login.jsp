@@ -7,14 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Index Page</h1>
-	<hr>
-	<a href="list">list 페이지 가기</a>
-	<br>
-	<hr>
 	
-	<a href="join">회원가입</a>
-	<a href="login">로그인 </a>
-	
+	<form action="" method="POST">
+		ID: <input type="text" name="id" >
+		PW: <input type="password" name="pw" >
+		<input type="submit" value="로그인" >
+	</form>
+	<a href="/">홈으로</a>
 </body>
 </html>
