@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,8 +14,15 @@
 	<br>
 	<hr>
 	
-	<a href="join">회원가입</a>
-	<a href="login">로그인 </a>
+	<a href="toJoin">회원가입</a>
+	<a href="toLogin">로그인 </a>
 	
+	
+	
+	
+	<!-- <p id="jojnRes">결과</p> -->
 </body>
+
+<script>
+</script>
 </html>
