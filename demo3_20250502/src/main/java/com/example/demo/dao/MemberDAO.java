@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -47,13 +48,42 @@ public class MemberDAO {
 	}
 	
 	//SELECT 
-	//1개 조회
+	
+//	public void selectIdPw(String id) {
+//		String query = "SELECT * FROM TBL_MEMBER WHERE ID = ?";
+//		jt.queryForObject(query,
+//	}
+	
+	
+	
+	
+	//1개 조회 - detail 용도 
 	public MemberDTO viewMember(String id) {
 		String query = "SELECT * FROM TBL_MEMBER WHERE ID = ? ";
-		MemberDTO member =jt.queryForObject(query, //하나의 데이터만 뽑을 때 
-					new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class),id);
+		MemberDTO member = null;
+		try {
+		member =jt.queryForObject(query, //하나의 데이터만 뽑을 때 
+					new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class),id);}
+		catch(EmptyResultDataAccessException e) {
+		}
 		return member ;
 	}
+	
+	//아이디만 조회 - id 중복체크 확인용 
+	public boolean selectOnlyId(String id) {
+		String query = "SELECT count(*) FROM TBL_MEMBER WHERE id = ?";
+		Integer count =jt.queryForObject(query, Integer.class,id);
+		// 1: 중복된다. 2: 중복아니다. (해당 id 없음)
+		return count != null && count > 0 ; 
+		//true: 중복  false: 중복아님 
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	//전체 조회
 	public List<MemberDTO> list() {
@@ -84,7 +114,6 @@ public class MemberDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
