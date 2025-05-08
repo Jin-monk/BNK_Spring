@@ -78,13 +78,6 @@ public class MemberDAO {
 		//true: 중복  false: 중복아님 
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	//전체 조회
 	public List<MemberDTO> list() {
 		String query = "SELECT * FROM TBL_MEMBER";
