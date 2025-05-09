@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test2.dao.IMemberDao">
+
+	<insert id="joinMember" >
+		INSERT INTO tbl_member VALUES(#{m.id}, #{m.pw}, #{m.name}, #{m.phone}, #{m.grade} )
+	</insert>
+	
+	<!-- 로그인확인 -->
+	<select id="loginCheck" resultType="com.example.test2.dto.MemberDTO">
+		SELECT * FROM tbl_member WHERE ID = #{id}
+	</select>
+	
+	<select id="memberList" resultType="com.example.test2.dto.MemberDTO">
+		SELECT * FROM tbl_member 
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

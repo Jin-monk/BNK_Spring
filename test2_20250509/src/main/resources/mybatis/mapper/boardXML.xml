@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test2.dao.IBoardDao">
+
+	<select id="boardList" resultType="com.example.test2.dto.BoardDTO">
+		select * from board9
+	</select>
+	
+	<select id="getBorad" resultType="com.example.test2.dto.BoardDTO">
+		select * from board9 WHERE title = #{title}
+	</select>
+
+	<update id="boardUpdate">
+		update board9 SET title = #{b.title}, content = #{b.content}, writer = #{b.writer} WHERE bno = #{b.bno}
+	</update>
+</mapper>
