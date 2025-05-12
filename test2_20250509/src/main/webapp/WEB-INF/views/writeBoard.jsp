@@ -10,7 +10,7 @@
 	<h1>Write Board Page</h1>
 	<hr>
 	
-	<form action="/write" method="post">
+	<form action="/writeBoard" method="GET">
 		<table border="1" cellpadding="10">
 			<tr>
 				<th>제목</th>
@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" style="width: 100%"></td>
+				<td><input type="text" name="writer" value="${loginInfo.id }" style="width: 100%" readonly></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit" value="등록">

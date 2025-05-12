@@ -71,6 +71,7 @@ public class MainController {
 	@GetMapping("/toOnlyMember")
 	public String tnOnlyMember() {
 		System.out.println("toOnlyMember...");
+		
 		return "onlyMember";
 	}
 	
@@ -80,6 +81,48 @@ public class MainController {
 		List<MemberDTO> mList = memberDao.memberList();
 		model.addAttribute("memberList", mList);
 		return "showMember";
+	}
+	
+	@GetMapping("/pagination/{page}")
+	public String pagination(@PathVariable("page")int page,
+							Model model) {
+		System.out.println("pagination...");
+		int pageSize = 10 ; // 1개의 페이지 게시글 수 
+		int blockSize = 10 ; // 페이지 번호 수 per block
+		
+		// 게시글 범위 계산
+		int start = (page -1) * pageSize + 1 ; //시작 rn 
+		int end = page * pageSize ;  // 끝 rn 
+		
+		// 전체 게시글 수 및 전체 페이지 수 계산
+		int totalCount = boardDao.getBoardCount(); //게시글 총 갯수 
+		int totalPage = (int)Math.ceil((double)totalCount / pageSize); // 총 갯수 / 1페이지 당 게시글 갯수의 올림 
+		
+		// 블록 계산 
+		int startPage = ((page-1)/blockSize) * blockSize + 1 ; 
+		int endPage = Math.min(startPage + blockSize - 1, totalPage);
+		
+		boolean hasPrevBlock = startPage > 1; 
+		boolean hasNextBlock = endPage < totalPage;
+	
+		// 데이터 조회 
+		List<BoardDTO> board=  boardDao.pagination(start,end);
+		
+		// jsp 전달
+		
+		model.addAttribute("board", board); // 데이터 
+		model.addAttribute("currentPage", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage); //총 페이지수 
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("hasPrevBlock", hasPrevBlock);
+		model.addAttribute("hasNextBlock", hasNextBlock);
+		
+	
+		return "showBoard";
+		
+		
+		
 	}
 	
 	@GetMapping("/showBoard")
@@ -94,6 +137,15 @@ public class MainController {
 		System.out.println("toWriteBoard...");
 		return "writeBoard";
 	}
+	
+	@GetMapping("/writeBoard")
+	public String writeBoard(BoardDTO board) {
+		System.out.println("writeBoard...");
+		boardDao.writeBoard(board);
+		return "redirect:/showBoard";
+	}
+	
+	
 	
 	@GetMapping("/boardDetail")
 	public String boardDatail(@RequestParam("title")String title,Model model) {
@@ -114,12 +166,25 @@ public class MainController {
 	public String boardDelete(@PathVariable("bno")String bno,
 							HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		MemberDTO checkWriter = (MemberDTO)session.getAttribute("loginInfo");
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		boardDao.getBoardByWriter(checkWriter.getId());
-		return "";
+		System.out.println("delete..........."+bno);
+		MemberDTO userInfo = (MemberDTO)session.getAttribute("loginInfo");
+		BoardDTO board = boardDao.getBoardByBno(bno);
+		if(board.getWriter().equals(userInfo.getId())) {
+			boardDao.deleteBoard(bno);
+			System.out.println("게시물 삭제 완료...");
+			return "redirect:/showBoard";
+		}else {
+			System.out.println("게시물 삭제 실패...");
+			return "showBoard";
+		}
+		
 	}
 	
+	@GetMapping("/writeCommnet")
+	public String writeCommnet(@RequestParam("bno")String bno) {
+		System.out.println(bno);	
+		return "index";
+	}
 	
 	
 	

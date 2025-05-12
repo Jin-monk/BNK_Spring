@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ex01.dao.IMemberDAO">
+	
+	<select id="getMember" resultType="com.example.ex01.dto.MemberDTO">
+		SELECT * FROM tbl_member where name = '법진'
+	</select>
+	
+	
+	<select id="getMemberAll" resultType="com.example.ex01.dto.MemberDTO">
+		SELECT * FROM tbl_member 
+	</select>
+	
+	
+</mapper>

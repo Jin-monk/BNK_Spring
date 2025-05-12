@@ -21,14 +21,5 @@
 	<a href="toOnlyMember">회원전용 게시판</a><br>
 	<hr>
 	
-	
-	
-	
-	<%-- ID:<%=member.getId() %><br>
-	PW:<%=member.getPw() %><br>
-	NAME:<%=member.getName() %><br>
-	PHONE:<%=member.getPhone() %><br>	
-	GRADE:<%=member.getGrade() %>
-	 --%>
 </body>
 </html>

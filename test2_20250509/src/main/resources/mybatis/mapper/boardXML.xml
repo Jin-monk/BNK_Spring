@@ -5,7 +5,11 @@
 <mapper namespace="com.example.test2.dao.IBoardDao">
 
 	<select id="boardList" resultType="com.example.test2.dto.BoardDTO">
-		select * from board9
+			SELECT * FROM ( 
+	    	SELECT ROWNUM rn, b.* 
+	   		FROM board9 b ORDER BY bno DESC
+	   		)
+		WHERE rn BETWEEN 1 AND 10
 	</select>
 	
 	<select id="getBorad" resultType="com.example.test2.dto.BoardDTO">
@@ -15,4 +19,33 @@
 	<update id="boardUpdate">
 		update board9 SET title = #{b.title}, content = #{b.content}, writer = #{b.writer} WHERE bno = #{b.bno}
 	</update>
+	
+	<select id="getBoardByBno" resultType="com.example.test2.dto.BoardDTO">
+		select * from board9 WHERE bno = #{bno}
+	</select>
+	
+	<delete id="deleteBoard">
+		DELETE FROM board9 WHERE bno = #{bno}
+	</delete>
+	
+	<insert id="insert">
+		insert into board9 values(board9_seq.nextval, #{board.title}, #{board.content}, #{board.writer}, #{board.regdate})
+	</insert>
+	
+	<select id="pagination" resultType="com.example.test2.dto.BoardDTO">
+		SELECT * FROM ( 
+	    	SELECT ROWNUM rn, b.* 
+	   		FROM board9 b ORDER BY bno DESC
+	   		)
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="writeBoard">
+		INSERT INTO board9 VALUES(board9_seq.nextval, #{b.title}, #{b.content}, #{b.writer}, SYSDATE  )
+	</insert>
+	
+	<select id="getBoardCount" resultType="int">
+	 	SELECT COUNT(*) FROM board9
+	</select>
+	
 </mapper>

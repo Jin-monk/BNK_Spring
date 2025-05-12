@@ -13,11 +13,20 @@ public interface IBoardDao {
 
 	List<BoardDTO> boardList();
 
-	BoardDTO getBorad(String title);
+	BoardDTO getBorad(@Param("title") String title);
 
 	void boardUpdate(@Param("b") BoardDTO board);
 
-	void getBoardByWriter(String id);
+	BoardDTO getBoardByBno(@Param("bno")String bno);
 
-	
+	void deleteBoard(@Param("bno") String bno);
+
+	//더미데이터 넣기 
+	int insert (@Param("board")BoardDTO board);
+
+	List<BoardDTO> pagination(@Param("start")int start, @Param("end")int end);
+
+	void writeBoard(@Param("b") BoardDTO board);
+
+	int getBoardCount();
 }
