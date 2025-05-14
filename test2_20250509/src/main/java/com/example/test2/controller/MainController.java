@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.test2.dao.IBoardDao;
+import com.example.test2.dao.ICommentDao;
 import com.example.test2.dao.IMemberDao;
 import com.example.test2.dto.BoardDTO;
+import com.example.test2.dto.CommentDTO;
 import com.example.test2.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private IBoardDao boardDao;
+	
+	@Autowired
+	private ICommentDao commentDao;
 	
 	@GetMapping("/index")
 	public String root() {
@@ -181,8 +186,11 @@ public class MainController {
 	}
 	
 	@GetMapping("/writeCommnet")
-	public String writeCommnet(@RequestParam("bno")String bno) {
-		System.out.println(bno);	
+	public String writeCommnet(@RequestParam("bno")String bno,
+								CommentDTO comment) {
+		commentDao.writeComment(bno, comment);
+		System.out.println("bno: "+bno);	
+		System.out.println("댓글 정보: "+ comment);
 		return "index";
 	}
 	
