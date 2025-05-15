@@ -19,5 +19,6 @@
 	<select id="getEndMovie" resultType="com.example.test03.dto.MovListDTO">
 		SELECT * FROM movList WHERE TO_DATE(endDate, 'YYYY-MM-DD') &lt; SYSDATE
 	</select>
-
+	
+	
 </mapper>

@@ -15,7 +15,7 @@ public interface IMovListDAO {
 	MovListDTO getOneByMovNo(@Param("movNo") int movNo);
 
 	List<MovListDTO> getComingMovie();
-
+	
 	List<MovListDTO> getEndMovie();
 	
 	

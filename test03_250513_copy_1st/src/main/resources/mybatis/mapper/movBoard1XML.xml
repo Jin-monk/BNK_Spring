@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test03.dao.IMovBoard1DAO">
+
+	<select id="getAll" resultType="com.example.test03.dto.MovBoard1DTO">
+		SELECT * FROM movBoard1 order by bd1No desc
+	</select>
+	<select id="getOneBybd1No" resultType="com.example.test03.dto.MovBoard1DTO">
+		SELECT * FROM movBoard1 WHERE bd1No = #{bd1No}
+	</select>
+
+</mapper>

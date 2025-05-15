@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test03.dao.IMovReserveDAO">
+
+	<select id="" resultType="com.example.test03.dto.MovReserveDTO">
+	</select>
+	
+	<insert id="insertReserve">
+		INSERT INTO movReserve VALUES
+		(seq_resNo.NEXTVAL, #{r.movNo}, #{r.movTitle}, #{r.resId}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{r.watchDate}, #{r.seatCount})
+	</insert>
+</mapper>

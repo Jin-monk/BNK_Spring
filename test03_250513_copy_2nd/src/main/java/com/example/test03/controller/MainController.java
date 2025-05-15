@@ -245,7 +245,7 @@ public class MainController {
 			return "event";
 		}
 	}
-	
+
 	@GetMapping("comingMovie")
 	public String comingMovie(Model model) {
 		System.out.println("comingMovie...");
@@ -261,8 +261,4 @@ public class MainController {
 		model.addAttribute("endMov", endMov);
 		return "comingMovie";
 	}
-	
-	
-	
-	
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test03.dao.IMemberDAO">
+
+	<select id="getIdById" resultType="com.example.test03.dto.MemberDTO">
+		SELECT id FROM movMember WHERE id = #{id}
+	</select>
+
+	<insert id="joinMember">
+		INSERT INTO movMember VALUES
+		(seq_mNo.nextval, #{id}, #{pw}, #{name}, #{phone}, 'C')
+	</insert>
+
+	<select id="loginCheck" resultType="com.example.test03.dto.MemberDTO">
+		SELECT * FROM movMember WHERE id = #{id}
+	</select>	
+</mapper>
