@@ -11,6 +11,10 @@
 	<hr>
 	<a href="/login">로그인 하러가기</a><br>
 	
-	<a href="/cookieMain">쿠키 메인으로 가기</a>
+	<a href="/cookieMain">쿠키 메인으로 가기</a><br>
+	
+	<a href="/popupMain">팝업 메인으로 가기</a><br>
+	
+	<a href="/user/userList">UserList 보기</a>
 </body>
 </html>

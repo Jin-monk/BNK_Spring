@@ -38,6 +38,8 @@ public class MainController {
 		return "loginForm";
 	}
 	
+	//-----------------------------------------------------
+	//사용자 정의 Session
 	@PostMapping("/login")
 	public String login2(@RequestParam("id")String id,
 			 				@RequestParam("pw")String pw,
@@ -118,7 +120,8 @@ public class MainController {
 		return "redirect:/login";
 	}
 	
-	
+	//-----------------------------------------------------
+	// 쿠키 설정 및 읽기 
 	
 	
 	@GetMapping("/set-cookie")
@@ -151,4 +154,45 @@ public class MainController {
 	public String cookieResult() {
 		return "cookieResult";
 	}
+	
+	//-----------------------------------------------------
+	// 팝업창 쿠키
+	@GetMapping("/popupMain")
+	public String popupMain() {
+		return "popupMain";
+	}
+	
+	@GetMapping("/popupCookie")
+	public @ResponseBody String popupCookie(HttpServletResponse response,
+											HttpServletRequest request,
+											Model model) {
+		String chkVal = request.getParameter("inactiveToday");
+//		System.out.println("popupCookie: "+chkVal);
+		if(chkVal != null && chkVal.equals("1")) {
+			Cookie cookie = new Cookie("PopupClose","off");
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+		}
+		
+		//jsp 에서 코드를 controller로 옮기는 중 ...  수정 필요  
+		String popupMode = "on";
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for (Cookie c : cookies) {
+				String cookieName = c.getName();
+				String cookieValue = c.getValue();
+				if(cookieName.equals(cookieName)) {
+					popupMode = cookieValue; 
+				}
+			}
+		}
+		model.addAttribute("popupMode", popupMode);
+		return "쿠키: 하루 동안 열지 않음";
+		
+	}
+	
+	
+	
+	
 }
