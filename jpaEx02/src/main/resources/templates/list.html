@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>List Page</h1>
+	<hr>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>PW</td>
+				<td>NAME</td>
+				<td>ROLE</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="member: ${list}">
+				<td th:text ="${member.id}"></td>
+				<td th:text ="${member.pw}"></td>
+				<td th:text ="${member.name}"></td>
+				<td th:text ="${member.role}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
