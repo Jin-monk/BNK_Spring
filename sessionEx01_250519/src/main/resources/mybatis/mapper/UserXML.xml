@@ -18,7 +18,8 @@
 			<if test="user.name != null and user.name.trim() != '' ">
 				AND name LIKE '%' ||  #{user.name} || '%'
 			</if>
-			<if test="user.role != null">
+			
+			<if test="user.role != null ">
 				AND role = #{user.role}
 			</if>
 		</where>
