@@ -1,0 +1,5 @@
+package com.example.jwt02.controller;
+
+public class JWTTestController {
+
+}

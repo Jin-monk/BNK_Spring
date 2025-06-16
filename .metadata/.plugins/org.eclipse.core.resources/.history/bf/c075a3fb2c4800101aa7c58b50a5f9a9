@@ -1,0 +1,20 @@
+package com.example._st_test.service;
+import com.example._st_test.repository.MemberRepository;
+import org.springframework.stereotype.Service;
+
+import com.example._st_test.dto.BoardDTO;
+import com.example._st_test.entity.Board;
+
+@Service
+public class BoardService {
+
+
+	public Board DtoToEntity(BoardDTO bDTO) {
+		Board bEntity = new Board();
+		bEntity.setTitle(bDTO.getTitle());
+		bEntity.setContent(bDTO.getContent());
+		bEntity.setWriter(bDTO.getWriter());
+		
+		return bEntity;
+	}
+}

@@ -1,0 +1,15 @@
+package com.example._st_test.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example._st_test.dto.MemberDTO;
+import com.example._st_test.entity.Member;
+
+public class MemberService {
+
+	public Member DtoToEntity (MemberDTO mDTO) {
+		Member mEntity = new Member();
+		
+		return mEntity
+	}
+}

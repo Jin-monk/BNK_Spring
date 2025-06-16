@@ -1,0 +1,8 @@
+spring.application.name=jwt01
+
+server.port=8094
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format-sql=ture
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.OracleDialect
+spring.jpa.show-sql=true

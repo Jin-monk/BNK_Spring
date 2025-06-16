@@ -1,0 +1,11 @@
+package com.example.jwt01;
+
+import lombok.Data;
+
+@Data
+public class UserDTO {
+
+	private String username;
+	private String password;
+	
+}

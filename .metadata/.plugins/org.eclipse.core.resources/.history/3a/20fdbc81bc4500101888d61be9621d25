@@ -1,0 +1,15 @@
+package com.example.memo.entity;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name="tbl_test")
+@Data
+public class Test {
+	
+	private int no;
+	private String txt;
+}

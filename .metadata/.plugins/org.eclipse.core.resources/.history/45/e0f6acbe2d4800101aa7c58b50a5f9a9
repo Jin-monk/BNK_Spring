@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h1>Write Form</h1>
+	<hr>
+	<form action="writeBoard" method="post">
+		<input type="text" name="title">
+		<input type="text" name="content">
+		<input type="hidden" name="writer">
+		<input type="submit" value="작성">
+	</form>
+</body>
+</html>

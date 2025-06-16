@@ -1,0 +1,250 @@
+package com.example.test03.controller;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.test03.dao.IMemberDAO;
+import com.example.test03.dao.IMovBoard1DAO;
+import com.example.test03.dao.IMovListDAO;
+import com.example.test03.dao.IMovReserveDAO;
+import com.example.test03.dao.IMovReviewDAO;
+import com.example.test03.dto.MemberDTO;
+import com.example.test03.dto.MovBoard1DTO;
+import com.example.test03.dto.MovListDTO;
+import com.example.test03.dto.MovReserveDTO;
+import com.example.test03.dto.MovReviewDTO;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class MainController {
+
+	@Autowired
+	private IMemberDAO memberDao;
+	
+	@Autowired
+	private IMovListDAO movListDao;
+	
+	@Autowired
+	private IMovBoard1DAO movboard1Dao;	
+	
+	@Autowired
+	private IMovReserveDAO movReserveDao;	
+	
+	@Autowired
+	private IMovReviewDAO movReviewDao;
+	
+	@GetMapping("/")
+	public String root() {
+		System.out.println("root...");
+		return "index";
+	}
+	@PostMapping("/index")
+	public String index() {
+		System.out.println("root...");
+		return "index";
+	}
+	
+	@GetMapping("/toJoin")
+	public String toJoin() {
+		System.out.println("toJoin...");
+		return "join";
+	}
+	
+	@PostMapping("/successJoin")
+	public String successJoin() {
+		System.out.println("successJoin");
+		return "successJoin";
+	}
+	
+	//회원가입 데이터 DB저장 
+	@PostMapping("/join")
+	public String join(MemberDTO member,Model model) {
+		memberDao.joinMember(member);
+		model.addAttribute("member", member);
+		return "successJoin";
+	}
+	
+	@GetMapping("toLogin")
+	public String toLogin() {
+		System.out.println("toLogin...");
+		return "login";
+	}
+	
+	// 로그인 ID,PW 확인 및 로그인 정보 저장
+	@PostMapping("/login")
+	public String login(@RequestParam("id")String id,
+						@RequestParam("pw")String pw,
+						HttpServletRequest request,
+						Model model,
+						RedirectAttributes rttr) {
+		System.out.println("login...");
+		MemberDTO member= memberDao.loginCheck(id,pw);
+		
+		if(member != null && pw != null && member.getPw().equals(pw)) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginInfo", member);
+			System.out.println("로그인 성공");
+			return "redirect:/";
+		}else {
+			System.out.println("로그인 실패");
+			rttr.addFlashAttribute("loginFail", "로그인을 실패했습니다.");
+			return "redirect:/";
+		}
+	}
+	
+	//영화목록 페이지 이동 및 데이터 List 받아와서 뿌리기
+	@GetMapping("/toShowMovie")
+	public String toShowMovie (Model model) {
+		System.out.println("toShowMovie...");
+		List<MovListDTO> movList =movListDao.getAll();
+		model.addAttribute("movList", movList);
+		return "showMovie";
+	}
+	
+	//영화 상세보기 페이지로 이동 및 해당 영화 데이터 가져와서 뿌리기
+	@GetMapping("/movieDetail/{movNo}")
+	public String movieDetail(@PathVariable("movNo")int movNo,
+							Model model) {
+		System.out.println("movieDetail...");
+		MovListDTO movie = movListDao.getOneByMovNo(movNo);
+		model.addAttribute("movie", movie);
+		return "movieDetail";
+			
+	}
+	//예약 성공 후 예약 내용 출력 및 페이지 이동 
+	@GetMapping("/successReserve")
+	public String successReserve(MovReserveDTO movReserve,
+								Model model,
+								RedirectAttributes rttr) {
+		System.out.println("successReserve...");
+		System.out.println(movReserve);
+		LocalDate today = LocalDate.now();
+		LocalDate watchDate = LocalDate.parse(movReserve.getWatchDate());
+		if(watchDate.isBefore(today)) {
+			System.out.println("예약날짜가 과거입니다.");
+			rttr.addFlashAttribute("errorDate", true);
+			return "redirect:/toShowMovie";
+		}else {
+			movReserveDao.insertReserve(movReserve);
+			model.addAttribute("reserveInfo", movReserve);
+			return "successReserve";
+		}
+	}
+	//로그아웃, 세션값 날리기
+	@GetMapping("/logOut")
+	public String logOut (HttpServletRequest request) {
+		System.out.println("logOut...");
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginInfo");
+		return "redirect:/";
+	}
+	//공지사항 게시판 글 전부 받아와서 view에 뿌리기
+	@GetMapping("/toBoard1")
+	public String toBoard1(Model model) {
+		System.out.println("toBoard1...");
+		List<MovBoard1DTO> board1List= movboard1Dao.getAll();
+		model.addAttribute("board1List", board1List);
+		return "board1";
+	}
+	//공지사항 게시판 1개 가져와서 view 에 뿌리기
+	@GetMapping("/board1Detail/{bd1No}")
+	public String board1Detail(@PathVariable("bd1No")int bd1No,
+								Model model) {
+		System.out.println("board1Detail...");
+		MovBoard1DTO board1 =movboard1Dao.getOneBybd1No(bd1No);
+		model.addAttribute("board1", board1);
+		System.out.println(board1);
+		return "board1Detail";
+	}
+	
+	// 영화 예약 form
+	@GetMapping("/reserveMovie/{movNo}/{movTitle}")
+	public String reserveMovie(@PathVariable("movNo") int movNo,
+								@PathVariable("movTitle")String movTitle,
+											HttpServletRequest request,
+											RedirectAttributes rttr,
+											Model model) {		
+		System.out.println("reserveMovie...");
+		HttpSession session = request.getSession();
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			rttr.addFlashAttribute("needLogin", true);
+			return "redirect:/toLogin";
+		} else {
+			model.addAttribute("movTitle", movTitle);
+			return "fragments/reserveForm";
+		}
+	}
+	
+	// movieDetail.jsp 에서 리뷰 데이터 가져오기
+	@GetMapping("/getReview/{movNo}")
+	public String getReview(@PathVariable("movNo") int movNo,
+							Model model) {
+		List<MovReviewDTO> reviewList = movReviewDao.getReview(movNo);
+		System.out.println("reviewList...");
+		model.addAttribute("reviewList", reviewList);
+		return "fragments/showReview";
+
+	}
+	// 리뷰 작성하기  !!!!!!!!!!!!!로그인 안한 상태 리뷰 구현 필요함
+	@PostMapping("/writeReview")
+	public String writeReview(MovReviewDTO movReview,
+							HttpServletRequest request,
+							RedirectAttributes rttr){
+		HttpSession session = request.getSession();
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			rttr.addFlashAttribute("needLogin", true);
+			return "redirect:/toLogin";
+		}else {
+			movReviewDao.writeReview(movReview);
+			return "redirect:/getReview/"+movReview.getMovNo();
+		}
+		
+	}
+	
+	//로그인한 사용자와 리뷰작성한 사용자의 ID 비교 후 동일하면 삭제
+	@PostMapping("/deleteReview/{reviewNo}/{movNo}")
+	public String deleteReview(@PathVariable("reviewNo")int reviewNo,
+								@PathVariable("movNo") int movNo,
+								HttpServletRequest request) {
+		System.out.println("deleteReview...");
+		HttpSession session = request.getSession();
+		MemberDTO loginInfo = (MemberDTO)session.getAttribute("loginInfo");
+		MovReviewDTO rev1 = movReviewDao.getReviewByReviewNo(reviewNo);
+		if(rev1.getWriterId().equals(rev1.getWriterId())) {
+			movReviewDao.deleteReview(reviewNo);
+			return "redirect:/getReview/"+movNo;
+		}
+		System.out.println("리뷰 삭제 실패");
+		return "/";
+	}
+	//이벤트 페이지 회원 확인 후 이동
+	@GetMapping("/toEvent")
+	public String toEvent(HttpServletRequest request,
+						RedirectAttributes rttr) {
+		System.out.println("toEvent...");
+		HttpSession session = request.getSession();
+		MemberDTO loginInfo = (MemberDTO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			rttr.addFlashAttribute("needLogin", true);
+			return "redirect:/toLogin";
+		}
+		else {
+			return "event";
+		}
+	}
+	
+	
+}

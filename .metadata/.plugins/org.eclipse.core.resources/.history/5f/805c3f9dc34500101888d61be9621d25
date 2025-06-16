@@ -1,0 +1,35 @@
+package com.example.memo.util;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class CalculatorTest {
+
+	Calculator calculator = new Calculator();
+	
+	@Test
+	void testDiv() {
+		int result = calculator.div(3, 5);
+		assertEquals(result , 15);
+	}
+//	@Test
+	void testMul() {
+		int result = calculator.mul(3, 5);
+		assertEquals(-2, result);
+	}
+//	@Test
+	void testSub() {
+		int result = calculator.sub(3, 5);
+		assertEquals(-2, result);
+	}
+	
+//	@Test
+	void testAddtion() {
+		int result = calculator.add(3, 5);
+		
+//		assertEquals(9, result, "3 + 5 = 8 입니다."); // 메시지 전달 
+		assertEquals(7, result, 1, "8에서 오차범위 +-1 까지 허용합니다."); // 1은 오차의 허용 범위 
+	}
+
+}

@@ -1,0 +1,71 @@
+package com.example._st_test.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example._st_test.dto.BoardDTO;
+import com.example._st_test.entity.Board;
+import com.example._st_test.entity.Member;
+import com.example._st_test.repository.BoardRepository;
+import com.example._st_test.service.BoardService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class BoardController {
+
+	@Autowired
+	private BoardService boardService;	
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@GetMapping("/write")
+	public String toWrite(Model model,
+						HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("loginInfo");
+		if(member == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("loginInfo", member);
+		return "board/writeForm";
+	}
+	
+	@PostMapping("/writeBoard")
+	public String wiredBoard(BoardDTO bDTO) {
+		if(bDTO.getTitle() == null) {
+			return "redirect:/write";
+		}
+		if(bDTO.getWriter() == null) {
+			return "redirect:/login";
+		}
+		Board bEntity= boardService.DtoToEntity(bDTO);
+		boardRepository.save(bEntity);
+		
+		return "redirect:/showBoard";
+	}
+	
+	@GetMapping("/showBoard")
+	public String showBoard(Model model) {
+		List<Board> bList = boardRepository.findAll();
+		model.addAttribute("bList", bList);
+		return "board/showBoard";
+	}
+	
+	@GetMapping("/board/detail/{boardNo}")
+	public String showDetail(@PathVariable("boardNo") Integer boardNo, Model model) {
+	    Board board = boardRepository.findById(boardNo).orElse(null);
+	    model.addAttribute("board", board);
+	    return "board/detail";  // templates/board/detail.html
+	}
+	
+	
+	
+}

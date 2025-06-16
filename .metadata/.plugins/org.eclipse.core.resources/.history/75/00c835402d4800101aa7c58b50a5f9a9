@@ -1,0 +1,26 @@
+package com.example._st_test.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example._st_test.dto.BoardDTO;
+import com.example._st_test.entity.Board;
+import com.example._st_test.entity.Member;
+import com.example._st_test.repository.MemberRepository;
+
+@Service
+public class BoardService {
+
+	@Autowired
+	private MemberRepository memberRepository;
+
+	
+	public Board DtoToEntity(BoardDTO bDTO) {
+		Board bEntity = new Board();
+		bEntity.setTitle(bDTO.getTitle());
+		bEntity.setContent(bDTO.getContent());
+		Member member = memberRepository.findByUsername(bDTO.getWriter());
+		bEntity.setWriter(member);
+		
+		return bEntity;
+	}
+}

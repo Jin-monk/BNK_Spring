@@ -1,0 +1,14 @@
+package com.example.memo.entity;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name="tbl_test")
+@Data
+public class Test {
+
+}

@@ -1,0 +1,40 @@
+package com.example._st_test.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example._st_test.dto.MemberDTO;
+import com.example._st_test.entity.Member;
+import com.example._st_test.repository.MemberRepository;
+import com.example._st_test.service.MemberService;
+
+@Controller
+public class MemberController {
+
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	
+	@GetMapping("/")
+	public String root() {
+		return "/member/index";
+	}
+	
+	@GetMapping("/join")
+	public String toJoin () {
+		return "/memberjoin";
+	}
+	
+	@PostMapping("/join")
+	public String join (MemberDTO member,
+						Model model) {
+		Member mEntity = memberService.DtoToEntity(member);
+		memberRepository.save(mEntity);
+		return "member/index";
+	}
+}

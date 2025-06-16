@@ -1,0 +1,11 @@
+package com.example._st_test.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example._st_test.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Integer>{
+
+	int findByUsername(String username);
+
+}

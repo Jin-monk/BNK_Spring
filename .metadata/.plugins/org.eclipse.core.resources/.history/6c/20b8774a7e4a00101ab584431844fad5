@@ -1,0 +1,5 @@
+package com.example.jwt02.util;
+
+public class JWTUtil {
+
+}

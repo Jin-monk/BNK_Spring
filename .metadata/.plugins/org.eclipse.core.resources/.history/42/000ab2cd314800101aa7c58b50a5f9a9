@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Show Board</h1>
+	<hr>
+	<table border="1">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+		</tr>
+		<tr th:each="board : ${bList}">
+			<td th:text="${board.boardNo}"></td>
+			<td>
+			 	<a th:href="showBoard"  th:text="${board.title}"></a>
+			 </td>
+			<td th:text="${board.writer.username}"></td>
+		</tr>
+	</table>
+</body>
+</html>

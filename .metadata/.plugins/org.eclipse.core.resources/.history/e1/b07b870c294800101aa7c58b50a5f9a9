@@ -1,0 +1,20 @@
+package com.example._st_test.service;
+
+import com.example._st_test.dto.MemberDTO;
+import com.example._st_test.entity.Member;
+
+public class MemberService {
+
+	public Member DtoToEntity (MemberDTO mDTO) {
+		Member mEntity = new Member();
+		mEntity.setUsername(mDTO.getUsername());
+		mEntity.setPassword(mDTO.getPassword());
+		mEntity.setName(mDTO.getName());
+		mEntity.setPhone(mDTO.getPhone());
+		return mEntity;
+	}
+	
+	
+	
+	
+}

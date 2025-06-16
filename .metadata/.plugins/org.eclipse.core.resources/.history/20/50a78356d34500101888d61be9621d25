@@ -1,0 +1,46 @@
+package com.example.memo.member;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.memo.entity.MemberEntity;
+import com.example.memo.repository.MemberRepository;
+
+@SpringBootTest
+class MemberTest {
+
+	MemberEntity member = new MemberEntity();
+	
+	@Autowired
+	MemberRepository memberRepository;
+	
+	@Test
+	void testInsertDummies() {
+		IntStream.rangeClosed(0, 3).forEach(i -> {
+			MemberEntity member = MemberEntity.builder()
+					.username("user"+ i )
+					.password("1234"+ i )
+					.name("user" + i )
+					.phone("010-1111-222" + i )
+					.build();
+			memberRepository.save(member);
+		});
+	}
+	
+//	@Test
+	void testSelect1() {
+		Integer memberId = 2; 
+		Optional<MemberEntity> result = memberRepository.findAllById(memberId);
+	}
+	
+//	@Test
+	void testUpdate() {
+		
+	}
+
+}

@@ -1,0 +1,37 @@
+package com.example.memo.member;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.memo.entity.MemberEntity;
+import com.example.memo.repository.MemberRepository;
+
+@SpringBootTest
+class MemberTest {
+
+	MemberEntity member = new MemberEntity();
+	
+	@Autowired
+	MemberRepository memberRepository;
+	
+//	@Test
+	void testInsert() {
+		member.setUsername("beobjin2");
+		member.setPassword("12345678");
+		member.setName("jin");
+		member.setPhone("010-1111-1111");
+		
+		memberRepository.save(member);
+	}
+	
+	@Test
+	void testDelete() {
+		member.setUsername("bebojin2");
+		
+		memberRepository.deleteByUsername(member);
+	}
+
+}

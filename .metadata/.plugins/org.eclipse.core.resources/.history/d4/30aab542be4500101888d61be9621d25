@@ -1,0 +1,21 @@
+package repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.memo.repository.TestRepository;
+@SpringBootTest
+class TestRepositoryTest {
+
+	@Autowired
+	TestRepository testRepository;
+	
+	@Test
+	void insertTest() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.example._st_test.dto;
+
+import jakarta.persistence.ManyToOne;
+
+public class BoardDTO {
+
+	private Integer boardNo;
+	private String title;
+	private	String content;
+	@ManyToOne
+	private String writer;
+}
+}

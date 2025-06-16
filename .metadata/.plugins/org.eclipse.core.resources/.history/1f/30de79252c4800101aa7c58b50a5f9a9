@@ -1,0 +1,17 @@
+package com.example._st_test.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example._st_test.dto.BoardDTO;
+import com.example._st_test.entity.Board;
+
+@Service
+public class BoardService {
+
+	public String DtoToEntity(BoardDTO bDTO) {
+		Board bEntity = new Board();
+		
+		
+		return "";
+	}
+}

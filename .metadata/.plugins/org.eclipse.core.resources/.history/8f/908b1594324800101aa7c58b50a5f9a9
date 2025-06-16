@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>Detail Page</h1>
+	<hr>
+ 	<p><strong>번호:</strong> <span th:text="${board.boardNo}"></span></p>
+    <p><strong>제목:</strong> <span th:text="${board.title}"></span></p>
+    <p><strong>내용:</strong> <span th:text="${board.content}"></span></p>
+    <p><strong>작성자:</strong> <span th:text="${board.writer.username}"></span></p>
+    <p><strong>등록일:</strong> <span th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+	<button>삭제</button>
+	
+	<a href="showBoard">목록보기</a>
+   
+    
+</body>
+</html>

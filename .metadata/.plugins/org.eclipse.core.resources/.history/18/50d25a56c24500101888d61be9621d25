@@ -1,0 +1,18 @@
+package com.example.memo.util;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class CalculatorTest {
+
+	Calculator calculator = new Calculator();
+	
+	@Test
+	void testAddtion() {
+		int result = calculator.add(3, 5);
+		
+		assertEquals(9, result, "3 + 5 = 8 입니다.");
+	}
+
+}

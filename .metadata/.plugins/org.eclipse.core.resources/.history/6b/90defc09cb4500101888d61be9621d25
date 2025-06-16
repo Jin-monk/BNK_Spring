@@ -1,0 +1,18 @@
+package com.example.memo.member;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import com.example.memo.entity.MemberEntity;
+
+class MemberTest {
+
+	MemberEntity member = new MemberEntity();
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

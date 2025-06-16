@@ -1,0 +1,15 @@
+package com.example.memo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
+@SpringBootApplication
+@EnableJpaAuditing // 등록일자, 수정일자 자동 등록 
+public class MemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MemoApplication.class, args);
+	}
+
+}

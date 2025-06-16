@@ -1,0 +1,18 @@
+package com.example._st_test.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class BoardController {
+
+	@GetMapping("/write")
+	public String toWrite(Model model,
+						HttpSession session) {
+		Member member = session.getAttribute("loginInfo");
+		return "/board/writeForm";
+	}
+}

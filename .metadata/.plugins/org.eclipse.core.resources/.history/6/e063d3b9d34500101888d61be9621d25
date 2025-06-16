@@ -1,0 +1,49 @@
+package com.example.memo.member;
+
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.memo.entity.MemberEntity;
+import com.example.memo.repository.MemberRepository;
+
+@SpringBootTest
+class MemberTest {
+
+	MemberEntity member = new MemberEntity();
+	
+	@Autowired
+	MemberRepository memberRepository;
+	
+//	@Test
+	void testInsertDummies() {
+		IntStream.rangeClosed(0, 3).forEach(i -> {
+			MemberEntity member = MemberEntity.builder()
+					.username("user"+ i )
+					.password("1234"+ i )
+					.name("user" + i )
+					.phone("010-1111-222" + i )
+					.build();
+			memberRepository.save(member);
+		});
+	}
+	
+	@Test
+	void testSelect1() {
+		Integer memberId = 7; 
+		Optional<MemberEntity> result = memberRepository.findById(memberId);
+		System.out.println("------------------");
+		if(result.isPresent()) {
+			MemberEntity member = result.get();
+			System.out.println(member);
+		}else {
+			System.out.println("해당 회원을 찾을 수 없습니다.");
+		}
+		
+	}
+	
+
+}

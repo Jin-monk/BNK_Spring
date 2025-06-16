@@ -1,0 +1,21 @@
+package com.example._st_test.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table("tbl_member9")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
+public class Member {
+
+	private String username;
+	private String password;
+	private String name;
+	
+}

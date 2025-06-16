@@ -1,0 +1,31 @@
+package com.example.jwt02.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.jwt02.dto.LoginDTO;
+import com.example.jwt02.util.JWTUtil;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+@RestController
+public class JWTTestController {
+
+	@Value("${spring.jwt.secret}")
+	private String secretKey;
+	
+	@Autowired
+	private JWTUtil jwtUtil;
+	
+	@PostMapping("/login")
+	public String login(@RequestBody LoginDTO loginDTO,
+						HttpServletResponse response) {
+		
+		String token = makeJwt(username); 
+		
+		return "";
+	}
+}

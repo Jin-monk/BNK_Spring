@@ -1,0 +1,39 @@
+package com.example.jwt01.controller;
+import java.util.Map;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestCon
+public class RestCon {
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
+        String id = loginData.get("id");
+        String password = loginData.get("password");
+
+        if ("user01".equals(id) && "1234".equals(password)) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("UserAuth", "Bearer " + id);
+            return new ResponseEntity<>("로그인 성공", headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<String> getUserInfo(@RequestHeader("UserAuth") String authHeader) {
+        if (authHeader.startsWith("Bearer ")) {
+            String userId = authHeader.substring(7); // "Bearer " 제거
+            return ResponseEntity.ok(userId);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효하지 않은 인증 헤더");
+        }
+    }
+}

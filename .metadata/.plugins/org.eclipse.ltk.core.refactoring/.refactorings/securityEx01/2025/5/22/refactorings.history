@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;securityEx01/src/main/resources/templates/inex.html&apos; to &apos;index.html&apos;" description="Rename resource &apos;inex.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/inex.html" name="index.html" stamp="1748496868589" updateReferences="true"/>
+</session>

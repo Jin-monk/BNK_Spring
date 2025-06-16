@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="/qna/write_qna_user"/>
+			<item value="to_write_qna_user"/>
+			<item value="/show_qna_user"/>
+			<item value="qna/show_qna_user"/>
+			<item value="/write_qna_user"/>
+			<item value="REVIEW_COUNT"/>
+			<item value="avgRating"/>
+			<item value="getThemesByReviewCount"/>
+			<item value="themeList"/>
+			<item value="my"/>
+			<item value="마"/>
+			<item value="마이페이지"/>
+			<item value="themeId"/>
+			<item value="reviewtab"/>
+			<item value="rediv"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="243"/>
+		<item key="DIALOG_Y_ORIGIN" value="391"/>
+	</section>
+</section>

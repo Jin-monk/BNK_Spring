@@ -1,0 +1,14 @@
+package com.example.memo.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+
+public class MemberEntity {
+
+	private Integer memberId;
+	private String username;
+	private String password;
+	private String name;
+	private String phone;
+}

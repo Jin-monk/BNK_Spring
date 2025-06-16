@@ -1,0 +1,17 @@
+package com.example.jwt01.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@org.springframework.web.bind.annotation.RestController
+public class RestController {
+
+	@PostMapping("/login")
+	public String login(@RequestBody) {
+		
+		return "";
+	}
+	
+	
+}

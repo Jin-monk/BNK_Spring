@@ -1,0 +1,11 @@
+package com.example.jwt02.util;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class JWTUtil {
+
+	private SecretKey secretKey;
+}

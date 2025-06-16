@@ -1,0 +1,24 @@
+package com.example._st_test.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class MemberController {
+
+	
+	
+	@GetMapping("/")
+	public String root() {
+		return "/member/index";
+	}
+	
+	@GetMapping("/join")
+	public String toJoin () {
+		return "/memberjoin";
+	}
+	
+	@PostMapping("/join")
+	public String join
+}
